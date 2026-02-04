@@ -1,2 +1,3 @@
-# car-part-supply-chain-analytics
-This project analyzes supply chains of local car part distributors and identifies the best suppliers for specific car brands and dealerships.
+# Analysis of Oklahoma Car Part Distributor Sales
+
+This project analyzes sales of local distributors and identifies the best suppliers for specific car brands and dealerships.
