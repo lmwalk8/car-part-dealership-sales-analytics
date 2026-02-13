@@ -27,6 +27,7 @@ ETL pipeline, analysis and interactive visualization of Oklahoma Used Motor Vehi
     - Libraries Used:
         - `pyspark`: For data processing.
         - `boto3`: For AWS connection.
+        - `python-dotenv`: For accessing any set environment variables.
 - Java JDK 8 or 11
     - Version required for PySpark
 

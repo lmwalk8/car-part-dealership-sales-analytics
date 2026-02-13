@@ -2,22 +2,25 @@
 Example script: upload dealer CSV to S3 raw path (Extract step).
 
 Prerequisites:
-  - boto3: pip install boto3
-  - AWS credentials configured (env vars, ~/.aws/credentials, or IAM role)
-  - S3 bucket and prefix created (or script will use existing bucket)
+  - boto3, python-dotenv: pip install -r requirements.txt
+  - AWS credentials: set in .env (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION)
+    or use aws configure / env vars
+  - S3 bucket and prefix (BUCKET, RAW_PREFIX in .env or env)
 
 Usage:
-  python scripts/upload_csv_to_s3.py
-  # Or with env override:
-  BUCKET=my-bucket RAW_PREFIX=raw/dealer-licenses python scripts/upload_csv_to_s3.py
+  python extract/upload_csv_to_s3.py
 """
 
 import os
 import boto3
+from dotenv import load_dotenv
 
-# Configure these or set env vars BUCKET, RAW_PREFIX
+# Load .env from repo root so BUCKET, RAW_PREFIX, and AWS_* are set
+load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
+
+# Configure these or set in .env / env vars BUCKET, RAW_PREFIX
 BUCKET = os.environ.get("BUCKET", "your-bucket-name")
-RAW_PREFIX = os.environ.get("RAW_PREFIX", "raw/dealer-licenses")
+RAW_PREFIX = os.environ.get("RAW_PREFIX", "raw/dealer-sales-data")
 # Path relative to repo root
 LOCAL_CSV = os.path.join(os.path.dirname(__file__), "..", "data", "data-motor-vehicle-dealer-sales.csv")
 OBJECT_KEY = f"{RAW_PREFIX.rstrip('/')}/data-motor-vehicle-dealer-sales.csv"
